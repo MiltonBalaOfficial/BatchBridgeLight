@@ -1,0 +1,25 @@
+{
+  "team": [
+    {
+      "studentId": "b5b8ff60-924e-45eb-8592-09d378cd4b4e",
+      "role": "Founder, Designer & Developer",
+      "order": 1
+    },
+    {
+      "studentId": "a10f52c1-8e3f-4f33-b143-2ae1c9791f01",
+      "role": "Initial Ideation & Backend",
+      "order": 2
+    },
+    {
+      "studentId": "f98b52cd-92c9-4ae6-8d8f-31f5e2bc99a4",
+      "role": "UI/UX Design",
+      "order": 3
+    },
+    {
+      "studentId": "e81c22f6-7c44-4d4a-8df0-3c2bf91bcf55",
+      "role": "Frontend Development",
+      "order": 4
+    }
+  ],
+  "external": []
+}

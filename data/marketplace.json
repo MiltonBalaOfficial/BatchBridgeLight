@@ -1,0 +1,115 @@
+[
+  {
+    "id": "item-1",
+    "sellerId": "f98b52cd-92c9-4ae6-8d8f-31f5e2bc99a4",
+    "sellerName": "Aarav Sharma",
+    "sellerAvatar": "/students/1.png",
+    "itemName": "B.D. Chaurasia's Human Anatomy",
+    "category": "Books",
+    "price": 1500,
+    "description": "Complete set of all 4 volumes. Gently used, in excellent condition. Perfect for 1st year students.",
+    "thumbnailUrl": "/database/marketplace/bd_chaurasia.jpg",
+    "images": [
+      "/database/marketplace/bd_chaurasia.jpg",
+      "/database/marketplace/bd_chaurasia_2.jpg",
+      "/database/marketplace/bd_chaurasia_3.jpg"
+    ],
+    "postedAt": "2025-11-20T10:00:00Z",
+    "faqs": [
+      {
+        "question": "Is this the latest edition?",
+        "answer": "This is the 8th edition, which is widely used. The latest is the 9th, but changes are minimal."
+      },
+      {
+        "question": "Are there any markings or highlights?",
+        "answer": "No, the books are clean with no markings."
+      }
+    ]
+  },
+  {
+    "id": "item-2",
+    "sellerId": "c23f77e8-9a1e-44f7-bb19-7fa7ad8c8f11",
+    "sellerName": "Priya Singh",
+    "sellerAvatar": "/students/2.png",
+    "itemName": "Littmann Classic III Stethoscope",
+    "category": "Equipment",
+    "price": 6000,
+    "description": "Black tube, almost new. Used only for a few months. Great acoustics.",
+    "thumbnailUrl": "/database/marketplace/stethoscope.jpg",
+    "images": [
+      "/database/marketplace/stethoscope.jpg",
+      "/database/marketplace/stethoscope_2.jpg"
+    ],
+    "postedAt": "2025-11-22T14:30:00Z",
+    "faqs": [
+      {
+        "question": "Does it come with the original box?",
+        "answer": "Yes, I have the original box and extra eartips."
+      }
+    ]
+  },
+  {
+    "id": "item-3",
+    "sellerId": "e81c22f6-7c44-4d4a-8df0-3c2bf91bcf55",
+    "sellerName": "Rohan Gupta",
+    "sellerAvatar": "/students/3.png",
+    "itemName": "Full Human Skeleton Model",
+    "category": "Miscellaneous",
+    "price": 12000,
+    "description": "Life-size, high-quality PVC model on a rolling stand. Ideal for anatomy studies. Slightly negotiable.",
+    "thumbnailUrl": "/database/marketplace/skeleton.jpg",
+    "images": ["/database/marketplace/skeleton.jpg"],
+    "postedAt": "2025-11-23T09:15:00Z",
+    "faqs": []
+  },
+  {
+    "id": "item-4",
+    "sellerId": "a10f52c1-8e3f-4f33-b143-2ae1c9791f01",
+    "sellerName": "Sneha Patel",
+    "sellerAvatar": "/students/4.png",
+    "itemName": "Guyton and Hall Textbook of Medical Physiology",
+    "category": "Books",
+    "price": 1200,
+    "description": "Latest South Asia edition. No markings or highlights. Includes online access code.",
+    "thumbnailUrl": "/database/marketplace/guyton.jpg",
+    "images": ["/database/marketplace/guyton.jpg"],
+    "postedAt": "2025-11-24T18:00:00Z",
+    "faqs": []
+  },
+  {
+    "id": "item-5",
+    "sellerId": "b5b8ff60-924e-45eb-8592-09d378cd4b4e",
+    "sellerName": "Vikram Kumar",
+    "sellerAvatar": "/students/5.png",
+    "itemName": "Welch Allyn Pocket Ophthalmoscope",
+    "category": "Equipment",
+    "price": 8500,
+    "description": "Compact and reliable, comes with a soft case. Perfect for clinical postings.",
+    "thumbnailUrl": "/database/marketplace/ophthalmoscope.jpg",
+    "images": [
+      "/database/marketplace/ophthalmoscope.jpg",
+      "/database/marketplace/ophthalmoscope_2.jpg"
+    ],
+    "postedAt": "2025-11-25T11:45:00Z",
+    "faqs": [
+      {
+        "question": "How old is it?",
+        "answer": "About 1 year old, but used sparingly during my clinical rotations."
+      }
+    ]
+  },
+  {
+    "id": "item-6",
+    "sellerId": "f98b52cd-92c9-4ae6-8d8f-31f5e2bc99a4",
+    "sellerName": "Anjali Reddy",
+    "sellerAvatar": "/students/6.png",
+    "itemName": "Dissection Kit",
+    "category": "Equipment",
+    "price": 500,
+    "description": "Complete stainless steel kit with scalpel handles, forceps, and scissors. Barely used.",
+    "thumbnailUrl": "/database/marketplace/dissection_kit.jpg",
+    "images": ["/database/marketplace/dissection_kit.jpg"],
+    "postedAt": "2025-11-26T16:20:00Z",
+    "faqs": []
+  }
+]

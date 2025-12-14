@@ -1,0 +1,25 @@
+{
+  "id": "b5b8ff60-924e-45eb-8592-09d378cd4b4e",
+  "registeredEmail": "mltnbla@gmail.com",
+  "collegeId": "b16b7458-1d89-4143-9b3c-7d6d7a6d1859",
+  "batch": "2025",
+  "theme": "system",
+  "interestedStudents": {
+    "e81c22f6-7c44-4d4a-8df0-3c2bf91bcf55": 95,
+    "a10f52c1-8e3f-4f33-b143-2ae1c9791f01": 80
+  },
+  "interestedColleges": {
+    "b16b7458-1d89-4143-9b3c-7d6d7a6d1859": 90,
+    "a2b1c3d4-e5f6-7890-1234-567890abcdef": 10
+  },
+  "collegeWisePreferences": true,
+  "defaultState": "West Bengal",
+  "preferenceWeights": {
+    "collegeWeight": 0.6,
+    "studentWeight": 0.4,
+    "mutualBoost": 0.3,
+    "stateBonus": 0.2,
+    "popularityWeight": 0.1,
+    "activityWeight": 0.1
+  }
+}

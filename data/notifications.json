@@ -1,0 +1,72 @@
+[
+  {
+    "id": "notif1",
+    "type": "new_message",
+    "isRead": false,
+    "timestamp": "2025-11-19T08:30:00Z",
+    "sender": {
+      "id": "2",
+      "name": "Jane Doe",
+      "avatar": "/students/2.png"
+    },
+    "content": "Hey, are you free to catch up tomorrow?",
+    "link": "/messages/2"
+  },
+  {
+    "id": "notif2",
+    "type": "story_of_the_day",
+    "isRead": false,
+    "timestamp": "2025-11-19T08:00:00Z",
+    "title": "A Day in the Life of a Surgeon",
+    "content": "Dr. Ananya Sharma shares her inspiring journey from a student to a leading cardiac surgeon. Don't miss her story!",
+    "link": "/stories/ananya-sharma"
+  },
+  {
+    "id": "notif3",
+    "type": "post_like",
+    "isRead": true,
+    "timestamp": "2025-11-18T20:15:00Z",
+    "sender": {
+      "id": "5",
+      "name": "Peter Jones",
+      "avatar": "/students/5.png"
+    },
+    "content": "liked your recent post.",
+    "link": "/feed/post1"
+  },
+  {
+    "id": "notif4",
+    "type": "new_comment",
+    "isRead": false,
+    "timestamp": "2025-11-18T19:05:00Z",
+    "sender": {
+      "id": "6",
+      "name": "Sarah Lee",
+      "avatar": "/students/6.png"
+    },
+    "content": "commented on your post: \"Great advice! Really needed this.\"",
+    "link": "/feed/post1"
+  },
+  {
+    "id": "notif5",
+    "type": "friend_request",
+    "isRead": false,
+    "timestamp": "2025-11-18T18:00:00Z",
+    "sender": {
+      "id": "4",
+      "name": "Emily White",
+      "avatar": "/students/4.png"
+    },
+    "content": "sent you a friend request.",
+    "link": "/connections/requests"
+  },
+  {
+    "id": "notif6",
+    "type": "system_announcement",
+    "isRead": true,
+    "timestamp": "2025-11-17T12:00:00Z",
+    "title": "New Feature: Dark Mode!",
+    "content": "You can now switch to dark mode in your settings. Let us know what you think!",
+    "link": "/settings/theme"
+  }
+]

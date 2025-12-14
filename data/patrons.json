@@ -1,0 +1,29 @@
+[
+  {
+    "type": "external",
+    "name": "Nemoric",
+    "role": "Patron",
+    "imageUrl": "/logo.png",
+    "bio": "Generous patron supporting the BatchBridge project.",
+    "website": "https://nemoric.com",
+    "socials": []
+  },
+  {
+    "type": "external",
+    "name": "NEET & CLEAR",
+    "role": "Patron",
+    "imageUrl": "/logo.png",
+    "bio": "Generous patron supporting the BatchBridge project.",
+    "website": "https://neetandclear.in",
+    "socials": []
+  },
+  {
+    "type": "external",
+    "name": "Dr. Prakash Chouhan",
+    "role": "Patron",
+    "imageUrl": "/logo.png",
+    "bio": "Generous patron supporting the BatchBridge project.",
+    "website": "https://www.instagram.com/drprakashchouhan/",
+    "socials": []
+  }
+]

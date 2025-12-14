@@ -1,0 +1,15 @@
+node_modules
+.next
+.husky
+public
+next-env.d.ts
+next.config.ts
+.prettierignore
+.eslintignore
+*.log
+cache
+.cache
+package-lock.json
+dist
+build
+docker-compose.yaml

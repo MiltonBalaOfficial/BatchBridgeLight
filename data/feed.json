@@ -1,0 +1,49 @@
+[
+  {
+    "id": "post1",
+    "authorId": "1",
+    "authorName": "Milton Bala",
+    "authorAvatar": "/students/milton_bala.jpg",
+    "timestamp": "2025-11-18T10:00:00Z",
+    "content": "Just had a great discussion with juniors about preparing for the final exams. It's amazing to see their enthusiasm! #medschool #juniors #seniors",
+    "media": [],
+    "likes": 15,
+    "comments": [
+      {
+        "id": "comment1-1",
+        "authorId": "2",
+        "authorName": "Jane Doe",
+        "authorAvatar": "/students/2.png",
+        "timestamp": "2025-11-18T10:30:00Z",
+        "content": "Thanks for the session, it was really helpful!"
+      }
+    ]
+  },
+  {
+    "id": "post2",
+    "authorId": "3",
+    "authorName": "John Smith",
+    "authorAvatar": "/students/3.png",
+    "timestamp": "2025-11-17T15:23:00Z",
+    "content": "Exploring the beautiful campus today. Feeling grateful for these moments.",
+    "media": [
+      {
+        "type": "image",
+        "url": "https://via.placeholder.com/600x400.png?text=Campus+View"
+      }
+    ],
+    "likes": 42,
+    "comments": []
+  },
+  {
+    "id": "post3",
+    "authorId": "4",
+    "authorName": "Emily White",
+    "authorAvatar": "/students/4.png",
+    "timestamp": "2025-11-16T09:00:00Z",
+    "content": "Anyone selling a second-hand stethoscope? DM me!",
+    "media": [],
+    "likes": 5,
+    "comments": []
+  }
+]
