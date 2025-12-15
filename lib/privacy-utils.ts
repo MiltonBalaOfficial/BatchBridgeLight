@@ -1,4 +1,4 @@
-import { Student, PrivacyObject } from '@/lib/types'; // Removed unused PrivacyLevel, SeniorityFilter, GenderFilter
+import { Student, PrivacyObject } from '@/lib/types';
 
 /**
  * Checks if the currentUser has permission to view a specific piece of information
@@ -25,12 +25,19 @@ export function checkPermission(
   }
 
   // Helper functions for relationship checks
-  const isBatchMate =
+  const canCheckSeniority =
     currentUser.admissionYear !== undefined &&
-    targetStudent.admissionYear !== undefined &&
-    targetStudent.admissionYear === currentUser.admissionYear;
+    targetStudent.admissionYear !== undefined;
 
-  // const isCollegeBuddy = true; // Removed unused variable
+  const isBatchmate =
+    canCheckSeniority &&
+    targetStudent.admissionYear === currentUser.admissionYear;
+  const isTargetSenior =
+    canCheckSeniority &&
+    targetStudent.admissionYear! < currentUser.admissionYear!;
+  const isTargetJunior =
+    canCheckSeniority &&
+    targetStudent.admissionYear! > currentUser.admissionYear!;
 
   // Check privacy level
   switch (privacy.level) {
@@ -38,98 +45,26 @@ export function checkPermission(
       return false; // Already handled for self above, so truly only me
     case 'allUsers':
     case 'collegeBuddy':
-      // Handled by default through current user check; no further restriction at this level for now
-      break;
-    case 'collegeBatchmate':
-    case 'yearMate':
-      if (!isBatchMate) {
-        return false;
-      }
-      break;
-    case 'collegeAlumni':
-      // Simplified: current user must be an alumnus (passedOut) and from the same college
-      // or target student is alumnus and current user is also alumnus
-      // This logic needs refinement based on actual relationship definition
-      if (!currentUser.passedOut || !targetStudent.passedOut) {
-        // Both need to have passed out for alumnus relation
-        return false;
-      }
-      // If current user is senior to target student (i.e., currentUser admitted earlier)
-      if (
-        currentUser.admissionYear !== undefined &&
-        targetStudent.admissionYear !== undefined &&
-        targetStudent.admissionYear > currentUser.admissionYear
-      ) {
-        break; // Current user is an alumnus relative to target
-      }
-      return false; // Not a college alumnus based on simplified logic
-    case 'friends': // Not implemented in current data model
-    case 'closedFriends': // Not implemented in current data model
-    case 'hostelBuddy': // Not implemented in current data model
-    case 'fromMyState': // Not implemented in current data model
-    case 'verifiedUsers': // Not implemented in current data model
-    case 'admin': // Not implemented in current data model
-      return false; // Unknown or unsupported privacy level
+      return true;
+
+    case 'batchmate':
+      return isBatchmate;
+
+    case 'senior': // Target is a senior
+      return isTargetSenior;
+
+    case 'junior': // Target is a junior
+      return isTargetJunior;
+
+    case 'batchmateandjunior':
+      return isBatchmate || isTargetJunior;
+
+    case 'batchmateandsenior':
+      return isBatchmate || isTargetSenior;
+
     default:
-      // Default case for PrivacyLevel values like 'public' that are handled earlier or no specific restriction
-      break;
+      // Default to true for any other unhandled but non-restrictive levels.
+      // E.g. 'public' which is already handled, but as a safeguard.
+      return true;
   }
-
-  // Check seniority filter (Applies *after* privacy level)
-  if (privacy.seniority) {
-    if (
-      currentUser.admissionYear === undefined ||
-      targetStudent.admissionYear === undefined
-    ) {
-      return false; // Cannot determine seniority without admission years
-    }
-    switch (privacy.seniority) {
-      case 'batchmatesOnly':
-        if (targetStudent.admissionYear !== currentUser.admissionYear)
-          return false;
-        break;
-      case 'seniorsOnly':
-        if (targetStudent.admissionYear >= currentUser.admissionYear)
-          return false;
-        break;
-      case 'juniorsOnly':
-        if (targetStudent.admissionYear <= currentUser.admissionYear)
-          return false;
-        break;
-      case 'notSeniors':
-        if (targetStudent.admissionYear < currentUser.admissionYear)
-          return false;
-        break;
-      case 'notJuniors':
-        if (targetStudent.admissionYear > currentUser.admissionYear)
-          return false;
-        break;
-      case 'all':
-      default:
-        break; // No specific seniority filter
-    }
-  }
-
-  // Check gender filter (Applies *after* privacy level and seniority)
-  if (privacy.gender) {
-    if (
-      currentUser.gender === undefined ||
-      targetStudent.gender === undefined
-    ) {
-      return false; // Cannot determine gender match without gender info
-    }
-    switch (privacy.gender) {
-      case 'sameGender':
-        if (targetStudent.gender !== currentUser.gender) return false;
-        break;
-      case 'oppositeGender':
-        if (targetStudent.gender === currentUser.gender) return false;
-        break;
-      case 'all':
-      default:
-        break; // No specific gender filter
-    }
-  }
-
-  return true; // All checks passed
 }

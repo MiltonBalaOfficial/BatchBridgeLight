@@ -1,0 +1,62 @@
+{
+  "team": [
+    {
+      "id": "milton-bala",
+      "name": "Milton Bala",
+      "role": "Founder, Designer & Developer",
+      "description": "MBBS Student (16th Batch), College Of Medicine and JNM Hospital, Kalyani, Nadia, West Bengal.",
+      "image": "/team-images/milton-bala.png",
+      "socials": [
+        {
+          "type": "github",
+          "url": "https://github.com/MiltonBalaOfficial"
+        }
+      ]
+    },
+    {
+      "id": "manab-bala",
+      "name": "Manab Bala",
+      "role": "Chief Developer",
+      "description": "Founder of FewTap.",
+      "image": "/team-images/manab-bala.png",
+      "socials": [
+        {
+          "type": "github",
+          "url": "https://github.com/manabbala"
+        },
+        {
+          "type": "website",
+          "url": "https://fewtap.com"
+        }
+      ]
+    }
+  ],
+  "patrons": [
+    {
+      "id": "patron-nemoric",
+      "name": "Nemoric",
+      "role": "Sponsor",
+      "description": "A leading educational platform providing comprehensive learning resources and innovative tools.",
+      "image": "/patron-images/nemoric.png",
+      "socials": [
+        {
+          "type": "website",
+          "url": "https://nemoric.com"
+        }
+      ]
+    },
+    {
+      "id": "patron-neet-clear",
+      "name": "NEET & Clear",
+      "role": "Sponsor",
+      "description": "Dedicated to helping students excel in NEET examinations with focused study materials and expert guidance.",
+      "image": "/patron-images/neet-clear.png",
+      "socials": [
+        {
+          "type": "website",
+          "url": "https://neetandclear.in"
+        }
+      ]
+    }
+  ]
+}

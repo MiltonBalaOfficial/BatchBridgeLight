@@ -11,12 +11,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Student,
-  College,
   PrivacyObject,
   PrivacyLevel,
-  SeniorityFilter,
-  GenderFilter,
-  WorkExperienceEntry,
 } from '@/lib/types';
 import { Button } from '../ui/button';
 import { checkPermission } from '@/lib/privacy-utils';
@@ -32,20 +28,10 @@ import {
   Phone,
   MessageSquare,
   Send,
-  Home,
   Building,
   Info,
   Cake,
   BookUser,
-  Instagram,
-  Github,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Link,
-  Image as ImageIcon,
-  Video,
-  Briefcase,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -60,56 +46,22 @@ interface StudentDetailsDialogProps {
   currentUser: Student | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  colleges: College[];
 }
 
 // Helper to create a human-readable string from a PrivacyObject
 const getPrivacyString = (privacy: PrivacyObject): string => {
-  const parts = [];
-
-  // Level
   const levelLabels: Record<PrivacyLevel, string> = {
     public: 'Public',
     onlyMe: 'Only Me',
     allUsers: 'All Users',
-    friends: 'Friends',
-    closedFriends: 'Closed Friends',
     collegeBuddy: 'College Buddies',
-    collegeBatchmate: 'College Batchmates',
-    collegeAlumni: 'College Alumni',
-    hostelBuddy: 'Hostel Buddies',
-    fromMyState: 'Users from my state',
-    yearMate: 'Year Mates',
-    alumni: 'Alumni',
-    verifiedUsers: 'Verified Users',
-    admin: 'Admins',
+    batchmate: 'Batchmates',
+    batchmateandjunior: 'Batchmates and Juniors',
+    batchmateandsenior: 'Batchmates and Seniors',
+    senior: 'Seniors',
+    junior: 'Juniors',
   };
-  parts.push(levelLabels[privacy.level] || 'a specific group');
-
-  // Seniority
-  if (privacy.seniority && privacy.seniority !== 'all') {
-    const seniorityLabels: Record<SeniorityFilter, string> = {
-      all: '', // should not be reached due to condition above
-      batchmatesOnly: 'who are batchmates',
-      seniorsOnly: 'who are seniors',
-      juniorsOnly: 'who are juniors',
-      notSeniors: 'who are not seniors',
-      notJuniors: 'who are not juniors',
-    };
-    parts.push(seniorityLabels[privacy.seniority]);
-  }
-
-  // Gender
-  if (privacy.gender && privacy.gender !== 'all') {
-    const genderLabels: Record<GenderFilter, string> = {
-      all: '', // should not be reached due to condition above
-      sameGender: 'of the same gender',
-      oppositeGender: 'of the opposite gender',
-    };
-    parts.push(genderLabels[privacy.gender]);
-  }
-
-  return parts.filter(Boolean).join(' ');
+  return levelLabels[privacy.level] || 'a specific group';
 };
 
 const PrivacyProtectedValue: React.FC<{
@@ -183,146 +135,80 @@ const CollapsibleDetailSection: React.FC<{
   </AccordionItem>
 );
 
-const getSocialIcon = (type: string) => {
-  switch (type.toLowerCase()) {
-    case 'instagram':
-      return <Instagram className='h-5 w-5' />;
-    case 'github':
-      return <Github className='h-5 w-5' />;
-    case 'linkedin':
-      return <Linkedin className='h-5 w-5' />;
-    case 'twitter':
-      return <Twitter className='h-5 w-5' />;
-    case 'facebook':
-      return <Facebook className='h-5 w-5' />;
-    default:
-      return <Link className='h-5 w-5' />;
-  }
-};
 
-// Helper function to find the current work experience
-const getCurrentWorkExperience = (
-  workExperiences: WorkExperienceEntry[] | undefined
-): WorkExperienceEntry | undefined => {
-  if (!workExperiences || workExperiences.length === 0) {
-    return undefined;
-  }
-
-  // First, look for an entry with "Present" as the 'to' date
-  const presentExperience = workExperiences.find(
-    (exp) => exp.to === 'Present' || !exp.to
-  );
-  if (presentExperience) {
-    return presentExperience;
-  }
-
-  // If no "Present" entry, find the one with the latest 'from' date
-  // Sort by 'from' date in descending order
-  const sortedExperiences = [...workExperiences].sort((a, b) => {
-    const dateA = a.from ? new Date(a.from).getTime() : 0;
-    const dateB = b.from ? new Date(b.from).getTime() : 0;
-    return dateB - dateA;
-  });
-
-  return sortedExperiences[0];
-};
 
 export function StudentDetailsDialog({
   student,
   currentUser,
   open,
   onOpenChange,
-  colleges,
 }: StudentDetailsDialogProps) {
   if (!student) {
     return null;
   }
 
-  const studentCollege = colleges.find(
-    (college) => college.id === student.collegeId
-  );
-
-  const currentWork = student.professionalInfo
-    ? getCurrentWorkExperience(student.professionalInfo.workExperience)
-    : undefined;
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-w-3xl'>
         <DialogHeader>
-          <div className='grid grid-cols-1 items-center gap-x-6 gap-y-4 text-center md:grid-cols-[auto,1fr] md:text-left'>
-            <div className='flex w-full flex-row items-center gap-4 md:contents'>
-              <Avatar className='h-24 w-24 flex-shrink-0 border-2 border-primary md:col-start-1 md:row-span-3 md:row-start-1 md:justify-self-start'>
-                {checkPermission(
-                  student.privacy_profileImage,
-                  currentUser,
-                  student
-                ) ? (
-                  <AvatarImage
-                    src={
-                      student.profileImage
-                        ? `/api/students/${student.Id}/image` // Corrected to student.Id
-                        : ''
-                    }
-                    alt={student.name_first}
-                  />
-                ) : (
-                  <AvatarImage
-                    src={`/api/students/placeholderDP.jpg/image`}
-                    alt='Placeholder Profile Image'
-                  />
-                )}
-                <AvatarFallback className='text-3xl'>
-                  {`${student.name_first?.[0] || ''}${
-                    student.name_last?.[0] || ''
-                  }`}
-                </AvatarFallback>
-              </Avatar>
+          <div className='flex flex-col items-center gap-4 sm:flex-row sm:items-start'>
+            <Avatar className='h-24 w-24 flex-shrink-0 border-2 border-primary sm:h-32 sm:w-32'>
+              {checkPermission(
+                student.privacy_profile_image,
+                currentUser,
+                student
+              ) ? (
+                <AvatarImage
+                  src={`/api/students/${student.Id}/image`}
+                  alt={student.name_first}
+                />
+              ) : (
+                <AvatarImage
+                  src={`/api/students/placeholder/image`}
+                  alt='Placeholder Profile Image'
+                />
+              )}
+              <AvatarFallback className='text-3xl'>
+                {`${student.name_first?.[0] || ''}${
+                  student.name_last?.[0] || ''
+                }`}
+              </AvatarFallback>
+            </Avatar>
 
-              <div className='flex flex-col justify-center md:col-start-2'>
-                <DialogTitle className='text-xl font-bold md:text-3xl'>
-                  {checkPermission(
-                    student.privacy_profile,
-                    currentUser,
-                    student
-                  )
-                    ? student.professionalInfo?.ProfessionalPreNominal
-                      ? `${student.professionalInfo.ProfessionalPreNominal} ${student.fullName}` // Using fullName
-                      : `${student.fullName}` // Using fullName
-                    : 'A BatchBridge User'}
-                </DialogTitle>
+            <div className='flex flex-col gap-1 text-center sm:text-left'>
+              <DialogTitle className='text-xl font-bold md:text-3xl'>
+                {checkPermission(student.privacy_profile, currentUser, student)
+                  ? student.fullName
+                  : 'A BatchBridge User'}
+              </DialogTitle>
 
-                {checkPermission(
-                  student.privacy_profile,
-                  currentUser,
-                  student
-                ) && (
-                  <div className='mt-1 flex flex-wrap justify-start gap-2'>
-                    {student.degree && (
-                      <Badge variant='outline'>{student.degree}</Badge>
+              {checkPermission(
+                student.privacy_profile,
+                currentUser,
+                student
+              ) && (
+                <div className='mt-2 flex flex-wrap justify-center gap-2 sm:justify-start'>
+                  <Badge variant='secondary'>
+                    {student.admissionYear} Admission
+                  </Badge>
+                  {student.passedOut &&
+                    typeof student.passedOut === 'number' && (
+                      <Badge variant='secondary'>
+                        Passed Out {student.passedOut}
+                      </Badge>
                     )}
-                    <Badge variant='secondary'>
-                      {student.admissionYear} Admission
-                    </Badge>
-                    {student.collegeBatch && (
-                      <Badge variant='secondary'>{student.collegeBatch}</Badge>
-                    )}
-                    {student.passedOut &&
-                      typeof student.passedOut === 'number' && (
-                        <Badge variant='secondary'>
-                          Passed Out {student.passedOut}
-                        </Badge>
-                      )}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
+              {checkPermission(
+                student.privacy_profile,
+                currentUser,
+                student
+              ) && (
+                <DialogDescription className='text-md'>
+                  College of Medicine and JNM Hospital
+                </DialogDescription>
+              )}
             </div>
-
-            {checkPermission(student.privacy_profile, currentUser, student) && (
-              <DialogDescription className='text-md md:col-start-2'>
-                {studentCollege?.name || 'Unknown College'}
-              </DialogDescription>
-            )}
           </div>
         </DialogHeader>
 
@@ -331,114 +217,13 @@ export function StudentDetailsDialog({
           collapsible
           className='grid max-h-[60dvh] w-full gap-6 overflow-y-auto py-6 pr-4 lg:max-h-[60vh]'
         >
-          {checkPermission(student.privacy_bio, currentUser, student) &&
-            student.bio && (
-              <CollapsibleDetailSection
-                title='About'
-                icon={<Info className='h-5 w-5' />}
-                value='about'
-              >
-                <p className='text-muted-foreground italic'>"{student.bio}"</p>
-              </CollapsibleDetailSection>
-            )}
-
-          {student.professionalInfo && (
+          {student.bio && (
             <CollapsibleDetailSection
-              title='Professional Information'
-              icon={<Briefcase className='h-5 w-5' />}
-              value='professional'
+              title='About'
+              icon={<Info className='h-5 w-5' />}
+              value='about'
             >
-              <PrivacyProtectedValue
-                privacy={student.privacy_professionalInfo}
-                currentUser={currentUser}
-                targetUser={student}
-                value={
-                  student.professionalInfo ? (
-                    <div className='space-y-4'>
-                      {currentWork && (
-                        <>
-                          <div className='flex items-start gap-4'>
-                            <div className='flex-1'>
-                              <p className='text-sm font-medium'>
-                                Current Designation
-                              </p>
-                              <div className='text-muted-foreground'>
-                                {currentWork.designation}
-                              </div>
-                            </div>
-                          </div>
-                          <div className='flex items-start gap-4'>
-                            <div className='flex-1'>
-                              <p className='text-sm font-medium'>
-                                Current Workplace
-                              </p>
-                              <div className='text-muted-foreground'>
-                                {currentWork.workplace}
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                      {student.professionalInfo.speciality && (
-                        <div className='flex items-start gap-4'>
-                          <div className='flex-1'>
-                            <p className='text-sm font-medium'>Speciality</p>
-                            <div className='text-muted-foreground'>
-                              {student.professionalInfo.speciality}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {student.professionalInfo.degrees &&
-                        student.professionalInfo.degrees.length > 0 && (
-                          <div>
-                            <p className='text-sm font-medium'>Degrees:</p>
-                            <div className='space-y-2'>
-                              {student.professionalInfo.degrees.map(
-                                (degree, index) => (
-                                  <div key={index} className='border-l-2 pl-4'>
-                                    <p className='text-sm font-medium'>
-                                      {degree.degreeName}
-                                    </p>
-                                    <p className='text-xs text-muted-foreground'>
-                                      {degree.institution}{' '}
-                                      {degree.year && `(${degree.year})`}
-                                    </p>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      {student.professionalInfo.workExperience &&
-                        student.professionalInfo.workExperience.length > 0 && (
-                          <div>
-                            <p className='text-sm font-medium'>
-                              Work Experience:
-                            </p>
-                            <div className='space-y-2'>
-                              {student.professionalInfo.workExperience.map(
-                                (exp, index) => (
-                                  <div key={index} className='border-l-2 pl-4'>
-                                    <p className='text-sm font-medium'>
-                                      {exp.designation} at {exp.workplace}
-                                    </p>
-                                    <p className='text-xs text-muted-foreground'>
-                                      {exp.from} - {exp.to || 'Present'}
-                                    </p>
-                                  </div>
-                                )
-                              )}
-                            </div>
-                          </div>
-                        )}
-                    </div>
-                  ) : (
-                    'No professional information available.'
-                  )
-                }
-                label='Professional Information'
-              />
+              <p className='text-muted-foreground italic'>"{student.bio}"</p>
             </CollapsibleDetailSection>
           )}
 
@@ -456,34 +241,18 @@ export function StudentDetailsDialog({
               label='Email'
             />
             <PrivacyProtectedValue
-              privacy={student.privacy_contact_alt_email}
+              privacy={student.privacy_contact_phone}
               currentUser={currentUser}
               targetUser={student}
-              value={student.contact_alt_email}
-              icon={<Mail className='h-5 w-5' />}
-              label='Alternate Email'
-            />
-            <PrivacyProtectedValue
-              privacy={student.privacy_contact_phone} // Corrected
-              currentUser={currentUser}
-              targetUser={student}
-              value={student.contact_phone} // Corrected
+              value={student.contact_phone}
               icon={<Phone className='h-5 w-5' />}
               label='Phone'
             />
             <PrivacyProtectedValue
-              privacy={student.privacy_contact_alt_phone}
+              privacy={student.privacy_contact_whatsapp}
               currentUser={currentUser}
               targetUser={student}
-              value={student.contact_alt_phone}
-              icon={<Phone className='h-5 w-5' />}
-              label='Alternate Phone'
-            />
-            <PrivacyProtectedValue
-              privacy={student.privacy_contact_whatsapp} // Corrected
-              currentUser={currentUser}
-              targetUser={student}
-              value={student.contact_whatsapp} // Corrected
+              value={student.contact_whatsapp}
               icon={<MessageSquare className='h-5 w-5' />}
               label='WhatsApp'
             />
@@ -510,96 +279,6 @@ export function StudentDetailsDialog({
           </CollapsibleDetailSection>
 
           <CollapsibleDetailSection
-            title='Social Media'
-            icon={<Link className='h-5 w-5' />}
-            value='social'
-          >
-            <PrivacyProtectedValue
-              privacy={student.privacy_socials}
-              currentUser={currentUser}
-              targetUser={student}
-              value={
-                student.socials && student.socials.length > 0 ? (
-                  <div className='space-y-2'>
-                    {student.socials.map((social, index) => (
-                      <div key={index} className='flex items-center gap-4'>
-                        {getSocialIcon(social.type)}
-                        <a
-                          href={social.url}
-                          target='_blank'
-                          rel='noreferrer'
-                          className='text-blue-500 hover:underline'
-                        >
-                          {social.type}: {social.url}
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className='text-muted-foreground'>
-                    No social media links available.
-                  </p>
-                )
-              }
-              icon={null}
-              label='Social Media'
-            />
-          </CollapsibleDetailSection>
-
-          <CollapsibleDetailSection
-            title='Address'
-            icon={<Home className='h-5 w-5' />}
-            value='address'
-          >
-            <PrivacyProtectedValue
-              privacy={student.privacy_currentAddress}
-              currentUser={currentUser}
-              targetUser={student}
-              value={
-                [
-                  student.current_houseNo,
-                  student.current_street,
-                  student.current_area,
-                  student.current_landmark,
-                  student.current_post_office,
-                  student.current_district,
-                  student.current_state,
-                  student.current_country,
-                ]
-                  .filter(Boolean)
-                  .join(', ') +
-                (student.current_pincode ? ` - ${student.current_pincode}` : '')
-              }
-              icon={<Building className='h-5 w-5' />}
-              label='Current Address'
-            />
-            <PrivacyProtectedValue
-              privacy={student.privacy_permanentAddress}
-              currentUser={currentUser}
-              targetUser={student}
-              value={
-                [
-                  student.permanent_houseNo,
-                  student.permanent_street,
-                  student.permanent_area,
-                  student.permanent_landmark,
-                  student.permanent_post_office,
-                  student.permanent_district,
-                  student.permanent_state,
-                  student.permanent_country,
-                ]
-                  .filter(Boolean)
-                  .join(', ') +
-                (student.permanent_pincode
-                  ? ` - ${student.permanent_pincode}`
-                  : '')
-              }
-              icon={<Home className='h-5 w-5' />}
-              label='Permanent Address'
-            />
-          </CollapsibleDetailSection>
-
-          <CollapsibleDetailSection
             title='Personal Information'
             icon={<Info className='h-5 w-5' />}
             value='personal'
@@ -613,108 +292,50 @@ export function StudentDetailsDialog({
               label='Birthday'
             />
             <PrivacyProtectedValue
-              privacy={student.privacy_birth_year}
+              privacy={student.privacy_FatherName}
               currentUser={currentUser}
               targetUser={student}
-              value={student.birth_year}
-              icon={<Cake className='h-5 w-5' />}
-              label='Birth Year'
+              value={student.FatherName}
+              icon={<BookUser className='h-5 w-5' />}
+              label="Father's Name"
+            />
+            <PrivacyProtectedValue
+              privacy={student.privacy_roll_no}
+              currentUser={currentUser}
+              targetUser={student}
+              value={student.roll_no}
+              icon={<BookUser className='h-5 w-5' />}
+              label='Roll Number'
             />
           </CollapsibleDetailSection>
 
           <CollapsibleDetailSection
-            title='Hostel History'
+            title='Current Hostel Room'
             icon={<Building className='h-5 w-5' />}
             value='hostel-history'
           >
             <PrivacyProtectedValue
-              privacy={student.privacy_hostelHistory}
+              privacy={student.privacy_currentHostelRoom}
               currentUser={currentUser}
               targetUser={student}
               value={
-                student.hostelHistory && student.hostelHistory.length > 0 ? (
-                  <div className='space-y-2'>
-                    {student.hostelHistory.map((entry, index) => (
-                      <div key={index} className='border-l-2 pl-4'>
-                        <p className='text-sm font-medium'>
-                          {entry.type === 'hosteller'
-                            ? `Hosteller in ${entry.building}, Room ${
-                                entry.room
-                              }${entry.bed ? `, Bed ${entry.bed}` : ''}`
-                            : 'Day Scholar'}
-                        </p>
-                        <p className='text-xs text-muted-foreground'>
-                          {entry.entry} - {entry.exit || 'Present'}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  'No hostel history available.'
-                )
-              }
-              label='Hostel History'
-            />
-          </CollapsibleDetailSection>
-
-          <CollapsibleDetailSection
-            title='Hostel Memories'
-            icon={<ImageIcon className='h-5 w-5' />}
-            value='hostel-memories'
-          >
-            <PrivacyProtectedValue
-              privacy={student.privacy_hostelMemories}
-              currentUser={currentUser}
-              targetUser={student}
-              value={
-                student.hostelMemories &&
-                (student.hostelMemories.images.length > 0 ||
-                  student.hostelMemories.videos.length > 0) ? (
-                  <div className='space-y-2'>
-                    {student.hostelMemories.images.length > 0 && (
-                      <div>
-                        <p className='text-sm font-medium'>Images:</p>
-                        <div className='flex flex-wrap gap-2'>
-                          {student.hostelMemories.images.map((image, index) => (
-                            <a
-                              key={index}
-                              href={image}
-                              target='_blank'
-                              rel='noreferrer'
-                              className='text-blue-500 hover:underline'
-                            >
-                              <ImageIcon className='mr-1 inline-block h-5 w-5' />
-                              {image.split('/').pop()}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {student.hostelMemories.videos.length > 0 && (
-                      <div>
-                        <p className='text-sm font-medium'>Videos:</p>
-                        <div className='flex flex-wrap gap-2'>
-                          {student.hostelMemories.videos.map((video, index) => (
-                            <a
-                              key={index}
-                              href={video}
-                              target='_blank'
-                              rel='noreferrer'
-                              className='text-blue-500 hover:underline'
-                            >
-                              <Video className='mr-1 inline-block h-5 w-5' />
-                              {video.split('/').pop()}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                student.currentHostelRoom ? (
+                  <div>
+                    <p className='text-lg'>{student.currentHostelRoom}</p>
+                    {student.hostelRoomUpdatedAt && (
+                      <p className='text-xs text-muted-foreground'>
+                        Last updated:{' '}
+                        {new Date(
+                          student.hostelRoomUpdatedAt
+                        ).toLocaleDateString()}
+                      </p>
                     )}
                   </div>
                 ) : (
-                  'No hostel memories available.'
+                  'No hostel information available.'
                 )
               }
-              label='Hostel Memories'
+              label='Current Hostel Room'
             />
           </CollapsibleDetailSection>
         </Accordion>

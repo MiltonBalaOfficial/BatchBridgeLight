@@ -1,28 +1,30 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { ExploreLightSidebar } from '@/components/sidebar/explore-light-sidebar';
+import { ExploreLightSidebar } from '@/components/sidebar/explore-sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { ExploreHeader } from '@/components/layout/explore-header';
 import { StudentGrid } from '@/components/explore/student-grid';
 import { StudentDetailsDialog } from '@/components/explore/student-details-dialog-professional';
-import { StudentGridSkeleton } from '@/components/explore/student-grid-skeleton';
-import { Student, College } from '@/lib/types'; // Import College type
-import { useStudentData } from '@/hooks/use-student-data';
+import { Student } from '@/lib/types';
 import { filterStudents } from '@/lib/student-utils';
 
-export default function ExploreLightPage() {
+interface ExploreLightClientProps {
+  students: Student[];
+  currentUser: Student | null;
+  batches: { value: string; label: string }[];
+}
+
+export default function ExploreLightClient({
+  students,
+  currentUser,
+  batches,
+}: ExploreLightClientProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('members');
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-
-  // Filters
   const [batch, setBatch] = useState<string | null>('all');
-
-  // Fetching data
-  const { students, currentUser, batches, colleges, loading, error } =
-    useStudentData();
 
   const handleStudentClick = (student: Student) => {
     setSelectedStudent(student);
@@ -36,31 +38,7 @@ export default function ExploreLightPage() {
     return filterStudents(students, currentUser, batch);
   }, [students, currentUser, batch]);
 
-  // Provide a dummy college array if colleges is empty, to satisfy type checking
-  // In a real scenario, colleges would be fetched from an API
-  const collegesToPass: College[] =
-    colleges.length > 0
-      ? colleges
-      : [{ id: 'dummy-college-id', name: 'Dummy College', short_name: 'DC' }];
-
   const MainContent = () => {
-    if (loading) {
-      return <StudentGridSkeleton />;
-    }
-    if (error) {
-      return (
-        <div className='flex h-full flex-col items-center justify-center text-center'>
-          <h2 className='text-xl font-semibold text-destructive'>
-            Error Loading Data
-          </h2>
-          <p className='text-muted-foreground'>{error}</p>
-          <p className='mt-4 text-sm text-muted-foreground'>
-            Please try refreshing the page. If the problem persists, contact
-            support.
-          </p>
-        </div>
-      );
-    }
     if (!currentUser) {
       return (
         <div className='flex h-full flex-col items-center justify-center text-center'>
@@ -87,7 +65,6 @@ export default function ExploreLightPage() {
     return (
       <StudentGrid
         students={filteredStudents}
-        colleges={collegesToPass} // Use the potentially mocked colleges
         onStudentClick={handleStudentClick}
         currentUser={currentUser}
       />
@@ -102,7 +79,7 @@ export default function ExploreLightPage() {
         activeMenu={activeMenu}
         onMenuChange={setActiveMenu}
         batches={batches}
-        loadingBatches={loading}
+        loadingBatches={false}
         currentUser={currentUser}
       />
 
@@ -120,7 +97,6 @@ export default function ExploreLightPage() {
         currentUser={currentUser}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
-        colleges={collegesToPass} // Use the potentially mocked colleges
       />
     </SidebarProvider>
   );

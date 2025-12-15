@@ -1,74 +1,24 @@
 // lib/types.ts
 
+// Based on the values in studentLight.json
 export type PrivacyLevel =
-  | 'public'
-  | 'onlyMe'
+  | 'public' // A sensible default
   | 'allUsers'
-  | 'friends'
-  | 'closedFriends'
   | 'collegeBuddy'
-  | 'collegeBatchmate'
-  | 'collegeAlumni'
-  | 'hostelBuddy'
-  | 'fromMyState'
-  | 'yearMate'
-  | 'alumni'
-  | 'verifiedUsers'
-  | 'admin';
-
-export type SeniorityFilter =
-  | 'all'
-  | 'batchmatesOnly'
-  | 'seniorsOnly'
-  | 'juniorsOnly'
-  | 'notSeniors'
-  | 'notJuniors';
-
-export type GenderFilter = 'all' | 'sameGender' | 'oppositeGender';
+  | 'batchmate'
+  | 'onlyMe'
+  | 'batchmateandjunior'
+  | 'batchmateandsenior'
+  | 'senior'
+  | 'junior';
 
 export interface PrivacyObject {
   level: PrivacyLevel;
-  seniority?: SeniorityFilter;
-  gender?: GenderFilter;
 }
 
 export interface SocialLink {
   type: string;
   url: string;
-}
-
-export interface Degree {
-  degreeName: string;
-  institution: string;
-  year?: number;
-}
-
-export interface WorkExperienceEntry {
-  designation: string;
-  workplace: string;
-  from: string;
-  to?: string;
-}
-
-export interface ProfessionalInfo {
-  ProfessionalPreNominal?: string;
-  speciality?: string;
-  degrees?: Degree[];
-  workExperience?: WorkExperienceEntry[];
-}
-
-export interface HostelHistoryEntry {
-  type: 'hosteller' | 'dayScholar';
-  building?: string;
-  room?: string;
-  bed?: string;
-  entry: string;
-  exit?: string;
-}
-
-export interface HostelMemories {
-  images: string[];
-  videos: string[];
 }
 
 export interface Student {
@@ -83,47 +33,21 @@ export interface Student {
   contact_phone?: string;
   contact_whatsapp?: string;
   contact_telegram?: string;
-  contact_alt_email?: string;
-  contact_alt_phone?: string;
   birth_day?: number;
   birth_month?: number;
-  birth_year?: number;
   socials?: SocialLink[];
   fullAddress?: string;
   profileImage?: string;
   bio?: string;
-  collegeId?: string;
-  name_first?: string; // Derived or undefined
-  name_last?: string; // Derived or undefined
+  currentHostelRoom?: string;
+  hostelRoomUpdatedAt?: string;
 
-  collegeBatch?: string;
-  degree?: string;
+  // Derived fields
+  name_first?: string;
+  name_last?: string;
 
-  current_houseNo?: string;
-  current_street?: string;
-  current_area?: string;
-  current_landmark?: string;
-  current_post_office?: string;
-  current_district?: string;
-  current_state?: string;
-  current_country?: string;
-  current_pincode?: string;
-
-  permanent_houseNo?: string;
-  permanent_street?: string;
-  permanent_area?: string;
-  permanent_landmark?: string;
-  permanent_post_office?: string;
-  permanent_district?: string;
-  permanent_state?: string;
-  permanent_country?: string;
-  permanent_pincode?: string;
-
-  professionalInfo?: ProfessionalInfo;
-  hostelHistory?: HostelHistoryEntry[];
-  hostelMemories?: HostelMemories;
-
-  // All privacy fields now use PrivacyObject
+  // Privacy fields as objects
+  privacy_profile?: PrivacyObject;
   privacy_contact_email?: PrivacyObject;
   privacy_contact_phone?: PrivacyObject;
   privacy_contact_whatsapp?: PrivacyObject;
@@ -131,23 +55,68 @@ export interface Student {
   privacy_address?: PrivacyObject;
   privacy_birth_day?: PrivacyObject;
   privacy_birth_month?: PrivacyObject;
-  privacy_profileImage?: PrivacyObject;
-  privacy_bio?: PrivacyObject;
-  privacy_professionalInfo?: PrivacyObject;
-  privacy_socials?: PrivacyObject;
-  privacy_currentAddress?: PrivacyObject;
-  privacy_permanentAddress?: PrivacyObject;
-  privacy_birth_year?: PrivacyObject;
-  privacy_hostelHistory?: PrivacyObject;
-  privacy_hostelMemories?: PrivacyObject;
-  privacy_profile?: PrivacyObject;
-  privacy_contact_alt_email?: PrivacyObject;
-  privacy_contact_alt_phone?: PrivacyObject;
+  privacy_profile_image?: PrivacyObject;
+  privacy_currentHostelRoom?: PrivacyObject;
+  privacy_roll_no?: PrivacyObject;
+  privacy_FatherName?: PrivacyObject;
 }
 
-export interface College {
+export interface RawStudent {
+  Id: string;
+  fullName: string;
+  FatherName?: string;
+  gender?: string;
+  admissionYear?: number;
+  roll_no?: string;
+  passedOut?: number | null;
+  contact_email?: string;
+  contact_Phone?: string; // Note the casing in JSON
+  contact_Whatsapp?: string;
+  contact_telegram?: string;
+  birth_day?: number;
+  birth_month?: number;
+  socials?: SocialLink[];
+  fullAddress?: string;
+  profileImage?: string;
+  bio?: string;
+  currentHostelRoom?: string;
+  hostelRoomUpdatedAt?: string;
+
+  // Privacy fields as strings from JSON
+  profilePrivacy?: string;
+  privacy_contact_email?: string;
+  privacy_contact_Phone?: string; // Note the casing in JSON
+  Privacy_contact_Whatsapp?: string; // Note the casing in JSON
+  privacy_contact_telegram?: string;
+  privacy_address?: string;
+  privacy_birth_day?: string;
+  privacy_birth_month?: string;
+  privacy_profile_image?: string;
+  privacy_currentHostelRoom?: string;
+  privacy_roll_no?: string;
+  privacy_FatherName?: string;
+
+  // Derived fields are not in raw data
+  name_first?: string;
+  name_last?: string;
+}
+
+
+
+export interface TeamMember {
   id: string;
   name: string;
-  short_name?: string;
-  // Add other college properties as needed
+  role: string;
+  description?: string;
+  image: string;
+  socials?: SocialLink[];
+}
+
+export interface Patron {
+  id: string;
+  name: string;
+  role: string;
+  description?: string;
+  image: string;
+  socials?: SocialLink[];
 }

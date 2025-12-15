@@ -13,7 +13,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ArrowRight, Menu, Facebook, Twitter, Instagram } from 'lucide-react';
-import { ContributorsSection } from '@/components/landing/ContributorsSection';
+import { TeamAndPatronsSection } from '@/components/landing/TeamAndPatronsSection';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -35,7 +35,7 @@ const Home = () => {
             </a>
             <ThemeToggle />
             <SignedIn>
-              <Link href='/explore-light'>
+              <Link href='/explore'>
                 <Button size='sm'>Explore</Button>
               </Link>
             </SignedIn>
@@ -74,7 +74,7 @@ const Home = () => {
                     </a>
                   </SheetClose>
                   <SignedIn>
-                    <Link href='/explore-light'>
+                    <Link href='/explore'>
                       <Button className='w-full'>Explore</Button>
                     </Link>
                   </SignedIn>
@@ -99,7 +99,7 @@ const Home = () => {
           <div className='container mx-auto px-4'>
             <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-2'>
               {/* Left Column: Content */}
-              <div className='text-center md:text-left'>
+              <div className='text-center'>
                 <h1 className='text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100'>
                   <span className='mb-8 block'>Turning Batches</span>
                   <span className='mb-8 block bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent'>
@@ -109,13 +109,13 @@ const Home = () => {
                     Lifelong Networks
                   </span>
                 </h1>
-                <p className='mx-auto mt-6 max-w-2xl text-lg text-gray-800 md:mx-0 dark:text-gray-300'>
+                <p className='mx-auto mt-6 max-w-2xl text-lg text-gray-800 dark:text-gray-300'>
                   BatchBridge is the exclusive platform for students of Colleges
                   to connect, collaborate, and build a stronger community.
                 </p>
-                <div className='mt-8 flex justify-center gap-4 md:justify-start'>
+                <div className='mt-8 flex justify-center gap-4'>
                   <SignedIn>
-                    <Link href='/explore-light'>
+                    <Link href='/explore'>
                       <Button
                         size='lg'
                         className='bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:bg-blue-700'
@@ -139,7 +139,7 @@ const Home = () => {
                 </div>
               </div>
               {/* Right Column: Logo */}
-              <div className='hidden flex-col items-center justify-center md:flex'>
+              <div className='mt-8 flex flex-col items-center justify-center md:mt-0'>
                 <div className='float-animation'>
                   <Image
                     src='/logo.png'
@@ -157,7 +157,7 @@ const Home = () => {
           </div>
         </section>
 
-        <ContributorsSection />
+        <TeamAndPatronsSection />
 
         {/* Call to Action Section */}
         <section className='bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-20 text-center dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800'>
@@ -170,7 +170,7 @@ const Home = () => {
             </p>
             <div className='mt-8 flex justify-center gap-4'>
               <SignedIn>
-                <Link href='/explore-light'>
+                <Link href='/explore'>
                   <Button
                     size='lg'
                     className='bg-white text-indigo-700 hover:bg-gray-100 hover:text-indigo-800'

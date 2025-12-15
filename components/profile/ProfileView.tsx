@@ -1,6 +1,6 @@
 'use client';
 
-import { Student, College } from '@/lib/types';
+import { Student } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -9,7 +9,6 @@ import {
   MessageSquare,
   Send,
   Home,
-  Building,
   Info,
   BookUser,
   Instagram,
@@ -18,16 +17,13 @@ import {
   Twitter,
   Facebook,
   Link,
-  Briefcase,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { WorkExperienceEntry } from '@/lib/types';
-import { checkPermission } from '@/lib/privacy-utils'; // Updated import
+import { checkPermission } from '@/lib/privacy-utils';
 
 interface ProfileViewProps {
   student: Student | null;
-  colleges: College[];
   currentUser: Student | null;
 }
 
@@ -46,6 +42,8 @@ const DetailSection: React.FC<{
   </div>
 );
 
+
+
 const getSocialIcon = (type: string) => {
   switch (type.toLowerCase()) {
     case 'instagram':
@@ -63,36 +61,8 @@ const getSocialIcon = (type: string) => {
   }
 };
 
-// Helper function to find the current work experience
-const getCurrentWorkExperience = (
-  workExperiences: WorkExperienceEntry[] | undefined
-): WorkExperienceEntry | undefined => {
-  if (!workExperiences || workExperiences.length === 0) {
-    return undefined;
-  }
-
-  // First, look for an entry with "Present" as the 'to' date
-  const presentExperience = workExperiences.find(
-    (exp) => exp.to === 'Present' || !exp.to
-  );
-  if (presentExperience) {
-    return presentExperience;
-  }
-
-  // If no "Present" entry, find the one with the latest 'from' date
-  // Sort by 'from' date in descending order
-  const sortedExperiences = [...workExperiences].sort((a, b) => {
-    const dateA = a.from ? new Date(a.from).getTime() : 0;
-    const dateB = b.from ? new Date(b.from).getTime() : 0;
-    return dateB - dateA;
-  });
-
-  return sortedExperiences[0];
-};
-
 export function ProfileView({
   student,
-  colleges,
   currentUser,
 }: ProfileViewProps) {
   if (!student) {
@@ -103,18 +73,10 @@ export function ProfileView({
     );
   }
 
-  const studentCollege = colleges.find(
-    (college) => college.id === student.collegeId
-  );
-
-  const currentWork = student.professionalInfo
-    ? getCurrentWorkExperience(student.professionalInfo.workExperience)
-    : undefined;
-
   const isImageVisible =
     student &&
     currentUser &&
-    checkPermission(student.privacy_profileImage, currentUser, student);
+    checkPermission(student.privacy_profile_image, currentUser, student);
 
   return (
     <div className='container mx-auto py-8'>
@@ -125,10 +87,10 @@ export function ProfileView({
               <AvatarImage
                 src={
                   isImageVisible && student.profileImage
-                    ? `/api/students/${student.Id}/image` // Corrected to student.Id
+                    ? `/api/students/${student.Id}/image`
                     : `/api/students/placeholderDP.jpg/image`
                 }
-                alt={student.fullName} // Using fullName
+                alt={student.fullName}
               />
               <AvatarFallback className='text-5xl'>
                 {student.name_first?.[0] || ''}
@@ -138,25 +100,14 @@ export function ProfileView({
 
             <div className='text-center md:text-left'>
               <CardTitle className='text-4xl font-bold'>
-                {student.passedOut &&
-                typeof student.passedOut === 'number' &&
-                student.degree === 'MBBS'
-                  ? `Dr. ${student.fullName}` // Using fullName
+                {student.passedOut && typeof student.passedOut === 'number'
+                  ? `Dr. ${student.fullName}`
                   : `${student.fullName}`}
               </CardTitle>
               <div className='mt-2 flex flex-wrap justify-center gap-2 md:justify-start'>
-                {student.degree && (
-                  <Badge variant='outline'>{student.degree}</Badge>
-                )}
                 <Badge variant='secondary'>
                   {student.admissionYear} Admission
                 </Badge>
-                {student.collegeBatch && (
-                  <Badge variant='secondary'>
-                    {student.collegeBatch}{' '}
-                    {studentCollege ? `(${studentCollege.short_name})` : ''}
-                  </Badge>
-                )}
                 {student.passedOut && typeof student.passedOut === 'number' && (
                   <Badge variant='secondary'>
                     Passed Out {student.passedOut}
@@ -164,7 +115,7 @@ export function ProfileView({
                 )}
               </div>
               <p className='mt-3 text-lg text-muted-foreground'>
-                {studentCollege ? studentCollege.name : 'Unknown College'}
+                College of Medicine and JNM Hospital
               </p>
             </div>
           </div>
@@ -228,7 +179,7 @@ export function ProfileView({
                     <Send className='h-5 w-5' />
                   </div>
                   <div className='flex-1'>
-                    <p className='text-sm font-medium'>Telegram</p>
+                    <p className='text-sm font--medium'>Telegram</p>
                     <div className='text-blue-500 hover:underline'>
                       {student.contact_telegram}
                     </div>
@@ -264,122 +215,21 @@ export function ProfileView({
 
             <Separator />
 
-            {student.permanent_country && (
+            {student.fullAddress && (
               <DetailSection
                 title='Address'
                 icon={<Home className='h-5 w-5' />}
               >
                 <div className='flex items-start gap-4'>
                   <div className='pt-1 text-muted-foreground'>
-                    <Building className='h-5 w-5' />
+                    <Home className='h-5 w-5' />
                   </div>
                   <div className='flex-1'>
-                    <p className='text-sm font-medium'>Permanent Address</p>
+                    <p className='text-sm font-medium'>Full Address</p>
                     <div className='text-muted-foreground'>
-                      {[
-                        student.permanent_houseNo,
-                        student.permanent_street,
-                        student.permanent_area,
-                        student.permanent_landmark,
-                        student.permanent_post_office,
-                        student.permanent_district,
-                        student.permanent_state,
-                        student.permanent_country,
-                      ]
-                        .filter(Boolean)
-                        .join(', ')}
-                      {student.permanent_pincode
-                        ? ` - ${student.permanent_pincode}`
-                        : ''}
+                      {student.fullAddress}
                     </div>
                   </div>
-                </div>
-              </DetailSection>
-            )}
-
-            <Separator />
-
-            {student.professionalInfo && (
-              <DetailSection
-                title='Professional Information'
-                icon={<Briefcase className='h-5 w-5' />}
-              >
-                <div className='space-y-4'>
-                  {currentWork && (
-                    <>
-                      <div className='flex items-start gap-4'>
-                        <div className='flex-1'>
-                          <p className='text-sm font-medium'>
-                            Current Designation
-                          </p>
-                          <div className='text-muted-foreground'>
-                            {currentWork.designation}
-                          </div>
-                        </div>
-                      </div>
-                      <div className='flex items-start gap-4'>
-                        <div className='flex-1'>
-                          <p className='text-sm font-medium'>
-                            Current Workplace
-                          </p>
-                          <div className='text-muted-foreground'>
-                            {currentWork.workplace}
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                  {student.professionalInfo.speciality && (
-                    <div className='flex items-start gap-4'>
-                      <div className='flex-1'>
-                        <p className='text-sm font-medium'>Speciality</p>
-                        <div className='text-muted-foreground'>
-                          {student.professionalInfo.speciality}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {student.professionalInfo.degrees &&
-                    student.professionalInfo.degrees.length > 0 && (
-                      <div>
-                        <p className='text-sm font-medium'>Degrees:</p>
-                        <div className='space-y-2'>
-                          {student.professionalInfo.degrees.map(
-                            (degree, index) => (
-                              <div key={index} className='border-l-2 pl-4'>
-                                <p className='text-sm font-medium'>
-                                  {degree.degreeName}
-                                </p>
-                                <p className='text-xs text-muted-foreground'>
-                                  {degree.institution}{' '}
-                                  {degree.year && `(${degree.year})`}
-                                </p>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  {student.professionalInfo.workExperience &&
-                    student.professionalInfo.workExperience.length > 0 && (
-                      <div>
-                        <p className='text-sm font-medium'>Work Experience:</p>
-                        <div className='space-y-2'>
-                          {student.professionalInfo.workExperience.map(
-                            (exp, index) => (
-                              <div key={index} className='border-l-2 pl-4'>
-                                <p className='text-sm font-medium'>
-                                  {exp.designation} at {exp.workplace}
-                                </p>
-                                <p className='text-xs text-muted-foreground'>
-                                  {exp.from} - {exp.to || 'Present'}
-                                </p>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    )}
                 </div>
               </DetailSection>
             )}

@@ -1,4 +1,4 @@
-// explore-light-sidebar.tsx
+// explore-sidebar.tsx
 'use client';
 
 import * as React from 'react';
