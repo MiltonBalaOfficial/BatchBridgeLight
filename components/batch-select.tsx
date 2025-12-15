@@ -20,6 +20,7 @@ type BatchSelectProps = {
   className?: string;
   batches?: Batch[];
   loading?: boolean;
+  userBatch?: string;
 };
 
 export function BatchSelect({
@@ -28,10 +29,29 @@ export function BatchSelect({
   className,
   batches = [],
   loading = false,
+  userBatch,
 }: BatchSelectProps) {
   const handleChange = (val: string) => {
     onChange?.(val);
   };
+
+  const [isOpen, setIsOpen] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        if (contentRef.current && userBatch) {
+          const item = contentRef.current.querySelector(
+            `[data-value="${userBatch}"]`
+          );
+          if (item) {
+            item.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      }, 10);
+    }
+  }, [isOpen, userBatch]);
 
   return (
     <div className={className}>
@@ -40,6 +60,7 @@ export function BatchSelect({
         value={value || ''}
         onValueChange={handleChange}
         disabled={loading || batches.length === 0}
+        onOpenChange={setIsOpen}
       >
         <SelectTrigger className='w-full'>
           <SelectValue
@@ -52,7 +73,7 @@ export function BatchSelect({
             }
           />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent ref={contentRef}>
           <SelectItem value='all'>All Batches</SelectItem>
           {batches.map((b) => (
             <SelectItem key={b.value} value={b.value}>

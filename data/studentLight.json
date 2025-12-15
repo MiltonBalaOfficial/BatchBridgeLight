@@ -1,0 +1,447 @@
+{
+  "a10f52c1-8e3f-4f33-b143-2ae1c9791f01": {
+    "id": "a10f52c1-8e3f-4f33-b143-2ae1c9791f01",
+    "created_at": "2025-12-15T04:41:04.700Z",
+    "updated_at": "2025-12-15T04:41:04.700Z",
+    "name_first": "Aritra",
+    "name_last": "Sarkar",
+    "gender": "male",
+    "collegeId": "b16b7458-1d89-4143-9b3c-7d6d7a6d1859",
+    "degree": "MBBS",
+    "admissionYear": 2019,
+    "passedOut": 2023,
+    "contact_email": "aritrasarkar@example.com",
+    "contact_phone": "+919876543210",
+    "contact_whatsapp": "+919876543210",
+    "contact_telegram": "@aritra_s",
+    "socials": [],
+    "profileImage": "/students/2.png",
+    "birth_day": 15,
+    "birth_month": 11,
+    "bio": "Loves surgery and medical research.",
+    "hostelHistory": [],
+    "hostelMemories": {
+      "images": [],
+      "videos": []
+    },
+    "privacy_profile": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_profileImage": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_email": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_phone": {
+      "level": "batchMates",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_whatsapp": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_telegram": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_permanentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_currentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_day": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_month": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_socials": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_year": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_email": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_phone": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_bio": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelHistory": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelMemories": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    }
+  },
+  "c23f77e8-9a1e-44f7-bb19-7fa7ad8c8f11": {
+    "id": "c23f77e8-9a1e-44f7-bb19-7fa7ad8c8f11",
+    "created_at": "2025-12-15T04:41:04.700Z",
+    "updated_at": "2025-12-15T04:41:04.700Z",
+    "name_first": "Sourav",
+    "name_last": "Das",
+    "gender": "male",
+    "collegeId": "b16b7458-1d89-4143-9b3c-7d6d7a6d1859",
+    "degree": "MBBS",
+    "admissionYear": 2019,
+    "passedOut": 2023,
+    "contact_email": "souravdas@example.com",
+    "contact_phone": "+919876543211",
+    "contact_whatsapp": "+919876543211",
+    "contact_telegram": "@sourav_d",
+    "socials": [],
+    "profileImage": "/students/4.png",
+    "birth_day": 20,
+    "birth_month": 5,
+    "bio": "Enthusiastic about cardiology and emergency medicine.",
+    "hostelHistory": [],
+    "hostelMemories": {
+      "images": [],
+      "videos": []
+    },
+    "privacy_profile": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_profileImage": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_email": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_phone": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_whatsapp": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_telegram": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_permanentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_currentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_day": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_month": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_socials": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_year": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_email": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_phone": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_bio": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelHistory": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelMemories": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    }
+  },
+  "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9": {
+    "id": "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
+    "clerkUserId": "user_34TcT8hD5wkKPqBxqViq6V1peKi",
+    "created_at": "2025-12-15T04:41:04.700Z",
+    "updated_at": "2025-12-15T04:41:06.315Z",
+    "name_first": "Rahul",
+    "name_last": "Sharma",
+    "gender": "male",
+    "collegeId": "b16b7458-1d89-4143-9b3c-7d6d7a6d1859",
+    "degree": "MBBS",
+    "admissionYear": 2025,
+    "passedOut": null,
+    "contact_email": "mltnbla@gmail.com",
+    "contact_phone": "+919876543212",
+    "contact_whatsapp": "+919876543212",
+    "contact_telegram": "@rahul_s",
+    "socials": [],
+    "profileImage": "/students/3.png",
+    "birth_day": 1,
+    "birth_month": 1,
+    "bio": "Passionate about pediatrics.",
+    "hostelHistory": [],
+    "hostelMemories": {
+      "images": [],
+      "videos": []
+    },
+    "privacy_profile": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_profileImage": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_email": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_phone": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_whatsapp": {
+      "level": "batchMates",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_telegram": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_permanentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_currentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_day": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_month": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_socials": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_year": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_email": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_phone": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_bio": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelHistory": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelMemories": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    }
+  },
+  "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6": {
+    "id": "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6",
+    "created_at": "2025-12-15T04:41:04.700Z",
+    "updated_at": "2025-12-15T04:41:04.700Z",
+    "name_first": "Priya",
+    "name_last": "Singh",
+    "gender": "female",
+    "collegeId": "b16b7458-1d89-4143-9b3c-7d6d7a6d1859",
+    "degree": "MBBS",
+    "admissionYear": 2021,
+    "passedOut": null,
+    "contact_email": "priyasingh@example.com",
+    "contact_phone": "+919876543213",
+    "contact_whatsapp": "+919876543213",
+    "contact_telegram": "@priya_s",
+    "socials": [],
+    "profileImage": "/students/5.png",
+    "birth_day": 10,
+    "birth_month": 6,
+    "bio": "Interested in public health and research.",
+    "hostelHistory": [],
+    "hostelMemories": {
+      "images": [],
+      "videos": []
+    },
+    "privacy_profile": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_profileImage": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_email": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_phone": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_whatsapp": {
+      "level": "batchMates",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_telegram": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_permanentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_currentAddress": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_day": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_month": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_socials": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_birth_year": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_email": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_contact_alt_phone": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_bio": {
+      "level": "collegeBuddy",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelHistory": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    },
+    "privacy_hostelMemories": {
+      "level": "onlyMe",
+      "seniority": "all",
+      "gender": "all"
+    }
+  }
+}

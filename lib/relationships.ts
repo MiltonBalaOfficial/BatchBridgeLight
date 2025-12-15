@@ -31,10 +31,13 @@ export function getRelationships(
 
   // College and year relationships
   if (currentUser.collegeId === targetUser.collegeId) {
+    console.log('College ID match confirmed. Adding collegeBuddy relationship.');
     relationships.add('collegeBuddy');
-    if (currentUser.admissionYear === targetUser.admissionYear) {
-      relationships.add('collegeBatchmate');
-    }
+  } else {
+    console.log('College ID MISMATCH:', {
+        currentUserCollege: currentUser.collegeId,
+        targetUserCollege: targetUser.collegeId,
+    });
   }
   if (currentUser.admissionYear === targetUser.admissionYear) {
     relationships.add('yearMate');
