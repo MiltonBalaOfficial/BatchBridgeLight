@@ -60,7 +60,7 @@ export const ContributorCard = ({
     : person.name;
   const imageUrl = isStudent
     ? person.profileImage
-      ? `/api/students/${person.id}/image`
+      ? `/api/students/${(person as Student).Id}/image` // Corrected to person.Id
       : ''
     : person.imageUrl;
   const socials = person.socials || [];

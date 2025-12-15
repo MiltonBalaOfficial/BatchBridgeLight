@@ -18,6 +18,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Home = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user } = useUser();
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950'>

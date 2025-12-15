@@ -57,7 +57,7 @@ export function ContributorsSection() {
           College[], // Type for collegesData
         ]) => {
           // Create a map of students for easier lookup
-          const studentsMap = new Map(studentsData.map((s) => [s.id, s]));
+          const studentsMap = new Map(studentsData.map((s) => [s.Id, s])); // Corrected to s.Id
 
           const mergedTeam = contributorsData.team
             .sort((a, b) => a.order - b.order)
@@ -135,7 +135,7 @@ export function ContributorsSection() {
               <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {team.map((person) => (
                   <ContributorCard
-                    key={person.type === 'student' ? person.id : person.name}
+                    key={person.type === 'student' ? person.Id : person.name} // Corrected to person.Id
                     person={person}
                     onClick={() => handleCardClick(person)}
                     colleges={colleges}

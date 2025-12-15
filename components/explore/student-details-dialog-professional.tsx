@@ -19,7 +19,7 @@ import {
   WorkExperienceEntry,
 } from '@/lib/types';
 import { Button } from '../ui/button';
-import { checkPermission } from '@/lib/relationships';
+import { checkPermission } from '@/lib/privacy-utils';
 import {
   Tooltip,
   TooltipContent,
@@ -69,7 +69,6 @@ const getPrivacyString = (privacy: PrivacyObject): string => {
 
   // Level
   const levelLabels: Record<PrivacyLevel, string> = {
-    all: 'All', // Added missing label
     public: 'Public',
     onlyMe: 'Only Me',
     allUsers: 'All Users',
@@ -88,9 +87,9 @@ const getPrivacyString = (privacy: PrivacyObject): string => {
   parts.push(levelLabels[privacy.level] || 'a specific group');
 
   // Seniority
-  if (privacy.seniority !== 'all') {
+  if (privacy.seniority && privacy.seniority !== 'all') {
     const seniorityLabels: Record<SeniorityFilter, string> = {
-      all: '',
+      all: '', // should not be reached due to condition above
       batchmatesOnly: 'who are batchmates',
       seniorsOnly: 'who are seniors',
       juniorsOnly: 'who are juniors',
@@ -101,9 +100,9 @@ const getPrivacyString = (privacy: PrivacyObject): string => {
   }
 
   // Gender
-  if (privacy.gender !== 'all') {
+  if (privacy.gender && privacy.gender !== 'all') {
     const genderLabels: Record<GenderFilter, string> = {
-      all: '',
+      all: '', // should not be reached due to condition above
       sameGender: 'of the same gender',
       oppositeGender: 'of the opposite gender',
     };
@@ -203,7 +202,7 @@ const getSocialIcon = (type: string) => {
 
 // Helper function to find the current work experience
 const getCurrentWorkExperience = (
-  workExperiences: WorkExperienceEntry[]
+  workExperiences: WorkExperienceEntry[] | undefined
 ): WorkExperienceEntry | undefined => {
   if (!workExperiences || workExperiences.length === 0) {
     return undefined;
@@ -262,7 +261,7 @@ export function StudentDetailsDialog({
                   <AvatarImage
                     src={
                       student.profileImage
-                        ? `/api/students/${student.id}/image`
+                        ? `/api/students/${student.Id}/image` // Corrected to student.Id
                         : ''
                     }
                     alt={student.name_first}
@@ -288,8 +287,8 @@ export function StudentDetailsDialog({
                     student
                   )
                     ? student.professionalInfo?.ProfessionalPreNominal
-                      ? `${student.professionalInfo.ProfessionalPreNominal} ${student.name_first} ${student.name_last}`
-                      : `${student.name_first} ${student.name_last}`
+                      ? `${student.professionalInfo.ProfessionalPreNominal} ${student.fullName}` // Using fullName
+                      : `${student.fullName}` // Using fullName
                     : 'A BatchBridge User'}
                 </DialogTitle>
 
@@ -465,10 +464,10 @@ export function StudentDetailsDialog({
               label='Alternate Email'
             />
             <PrivacyProtectedValue
-              privacy={student.privacy_contact_phone}
+              privacy={student.privacy_contact_phone} // Corrected
               currentUser={currentUser}
               targetUser={student}
-              value={student.contact_phone}
+              value={student.contact_phone} // Corrected
               icon={<Phone className='h-5 w-5' />}
               label='Phone'
             />
@@ -481,10 +480,10 @@ export function StudentDetailsDialog({
               label='Alternate Phone'
             />
             <PrivacyProtectedValue
-              privacy={student.privacy_contact_whatsapp}
+              privacy={student.privacy_contact_whatsapp} // Corrected
               currentUser={currentUser}
               targetUser={student}
-              value={student.contact_whatsapp}
+              value={student.contact_whatsapp} // Corrected
               icon={<MessageSquare className='h-5 w-5' />}
               label='WhatsApp'
             />

@@ -23,7 +23,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { WorkExperienceEntry } from '@/lib/types';
-import { checkPermission } from '@/lib/relationships';
+import { checkPermission } from '@/lib/privacy-utils'; // Updated import
 
 interface ProfileViewProps {
   student: Student | null;
@@ -65,7 +65,7 @@ const getSocialIcon = (type: string) => {
 
 // Helper function to find the current work experience
 const getCurrentWorkExperience = (
-  workExperiences: WorkExperienceEntry[]
+  workExperiences: WorkExperienceEntry[] | undefined
 ): WorkExperienceEntry | undefined => {
   if (!workExperiences || workExperiences.length === 0) {
     return undefined;
@@ -125,10 +125,10 @@ export function ProfileView({
               <AvatarImage
                 src={
                   isImageVisible && student.profileImage
-                    ? `/api/students/${student.id}/image`
+                    ? `/api/students/${student.Id}/image` // Corrected to student.Id
                     : `/api/students/placeholderDP.jpg/image`
                 }
-                alt={student.name_first}
+                alt={student.fullName} // Using fullName
               />
               <AvatarFallback className='text-5xl'>
                 {student.name_first?.[0] || ''}
@@ -141,8 +141,8 @@ export function ProfileView({
                 {student.passedOut &&
                 typeof student.passedOut === 'number' &&
                 student.degree === 'MBBS'
-                  ? `Dr. ${student.name_first} ${student.name_last}`
-                  : `${student.name_first} ${student.name_last}`}
+                  ? `Dr. ${student.fullName}` // Using fullName
+                  : `${student.fullName}`}
               </CardTitle>
               <div className='mt-2 flex flex-wrap justify-center gap-2 md:justify-start'>
                 {student.degree && (

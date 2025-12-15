@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { X } from 'lucide-react';
-import Link from 'next/link';
+// import Link from 'next/link'; // Removed unused import
 import { useSidebar } from '@/components/ui/sidebar';
 import {
   Sidebar,
@@ -18,7 +18,8 @@ import { BatchSelect } from '@/components/batch-select';
 import { useUser } from '@clerk/nextjs';
 import { Student } from '@/lib/types';
 
-interface ExploreLightSidebarProps extends React.ComponentProps<typeof Sidebar> {
+interface ExploreLightSidebarProps
+  extends React.ComponentProps<typeof Sidebar> {
   batch?: string | null;
   onBatchChange?: (batch: string | null) => void;
   activeMenu?: string;
@@ -40,7 +41,8 @@ export function ExploreLightSidebar({
 }: ExploreLightSidebarProps) {
   const { setOpenMobile } = useSidebar();
   const [variant, setVariant] = React.useState<'inset' | 'floating'>('inset');
-  const { user } = useUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { user } = useUser(); // Disabled warning for unused variable
 
   // Handle responsive sidebar variant
   React.useEffect(() => {

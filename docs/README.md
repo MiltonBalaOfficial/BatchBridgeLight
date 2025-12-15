@@ -9,7 +9,6 @@ This is a Next.js project utilizing the App Router, written in TypeScript. It in
 For more details, see:
 
 - [Architecture Documentation](./ARCHITECTURE.md)
-- [Development Documentation](./DEVELOPMENT.md)
 
 ## Key Topics
 

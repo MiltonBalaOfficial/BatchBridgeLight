@@ -2,7 +2,7 @@
 import { Student, College } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import { checkPermission } from '@/lib/relationships';
+import { checkPermission } from '@/lib/privacy-utils'; // Updated import
 import { Lock } from 'lucide-react';
 
 interface StudentGridProps {
@@ -35,7 +35,7 @@ export function StudentGrid({
         if (!isProfileVisible) {
           return (
             <Card
-              key={student.id}
+              key={student.Id} // Corrected to student.Id
               className='flex cursor-not-allowed flex-col items-center justify-center bg-muted/50 p-4'
             >
               <div className='text-center text-muted-foreground'>
@@ -47,14 +47,14 @@ export function StudentGrid({
         }
 
         const isImageVisible = checkPermission(
-          student.privacy_profileImage,
+          student.privacy_profileImage, // Corrected to privacy_profileImage
           currentUser,
           student
         );
 
         return (
           <Card
-            key={student.id}
+            key={student.Id} // Corrected to student.Id
             onClick={() => onStudentClick(student)}
             className='cursor-pointer transition-shadow hover:shadow-lg'
           >
@@ -64,10 +64,10 @@ export function StudentGrid({
                   <Image
                     src={
                       student.profileImage
-                        ? `/api/students/${student.id}/image`
+                        ? `/api/students/${student.Id}/image` // Corrected to student.Id
                         : ''
                     }
-                    alt={`${student.name_first} ${student.name_last}`}
+                    alt={student.fullName || ''} // Using fullName
                     fill
                     style={{ objectFit: 'cover' }}
                   />
@@ -83,11 +83,11 @@ export function StudentGrid({
             </CardHeader>
             <CardContent className='text-center'>
               <CardTitle>
-                {student.professionalInfo?.ProfessionalPreNominal ? (
-                  `${student.professionalInfo.ProfessionalPreNominal} ${student.name_first} ${student.name_last}`
-                ) : (
-                  `${student.name_first} ${student.name_last}`
-                )}
+                {
+                  student.professionalInfo?.ProfessionalPreNominal
+                    ? `${student.professionalInfo.ProfessionalPreNominal} ${student.fullName}` // Using fullName
+                    : `${student.fullName}` // Using fullName
+                }
               </CardTitle>
               <p className='text-muted-foreground'>
                 {student.degree && `${student.degree} - `}
